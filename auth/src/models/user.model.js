@@ -18,13 +18,16 @@ const userSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
-  password: String,
-  fullName: {
-    firstName: {
+  password: {
+    type: String,
+    select: false,
+  },
+  fullname: {
+    firstname: {
       type: String,
       required: true,
     },
-    lastName: {
+    lastname: {
       type: String,
       required: true,
     },
@@ -33,6 +36,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ["user", "seller"],
     required: true,
+    default: "user",
   },
   adderess: [addressSchema],
 });
