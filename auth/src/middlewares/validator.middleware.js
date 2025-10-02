@@ -57,41 +57,62 @@ const registerUserValidation = [
 ];
 
 const loginUserValidation = [
-  // 1. Validate that the password exists and is a string. This is always required.
   body("password").isString().notEmpty().withMessage("Password is required"),
 
-  // 2. Add a custom validator to check if at least one of email or username is provided.
-  //    We can attach it to the 'email' field's validation chain.
   body("email").custom((value, { req }) => {
     if (!value && !req.body.username) {
-      // If neither email (value) nor username exists on the request body, throw an error.
       throw new Error("Either email or username is required for login");
     }
-    // If at least one exists, the validation passes.
+
     return true;
   }),
 
-  // 3. Conditionally validate email IF it is provided.
-  //    .optional({ checkFalsy: true }) ensures this chain only runs if the field is not empty.
   body("email")
     .optional({ checkFalsy: true }) // Skips validation if field is empty, null, or undefined
     .trim()
     .isEmail()
     .withMessage("Please provide a valid email address")
-    .normalizeEmail(), // Sanitizes the email address
-
-  // 4. Conditionally validate username IF it is provided.
+    .normalizeEmail(),
   body("username")
     .optional({ checkFalsy: true })
     .trim()
     .isString()
     .withMessage("Username must be a string"),
 
-  // 5. Your custom middleware to handle the collected errors.
   respondWithValidationErrors,
 ];
 
+const addAddressValidator = [
+  body("street").trim().notEmpty().withMessage("Street is required"),
+
+  body("city").trim().notEmpty().withMessage("City is required"),
+
+  body("state").trim().notEmpty().withMessage("State is required"),
+
+  body("zip")
+    .trim()
+    .notEmpty()
+    .withMessage("ZIP code is required")
+    .isPostalCode("any")
+    .withMessage("Invalid ZIP/postal code"),
+
+  body("country").trim().notEmpty().withMessage("Country is required"),
+
+  body("isDefault")
+    .optional()
+    .isBoolean()
+    .withMessage("isDefault must be a boolean"),
+
+  body("phone")
+    .trim()
+    .notEmpty()
+    .withMessage("Phone number is required")
+    .isMobilePhone()
+    .withMessage("Invalid phone number"),
+  respondWithValidationErrors,
+];
 module.exports = {
   registerUserValidation,
   loginUserValidation,
+  addAddressValidator,
 };
