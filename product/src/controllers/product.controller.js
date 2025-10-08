@@ -1,4 +1,4 @@
-const uploadImage = async (params) => {};
+const { uploadImage } = require("../services/imagekit.service");
 async function addProduct(req, res) {
   try {
     const { title, description, amount, currency } = req.body;
@@ -7,9 +7,11 @@ async function addProduct(req, res) {
       amount: Number(amount),
       currency,
     };
-    const images = []; 
+    const images = [];
     const files = await Promise.all(
-      (req.files || []).map((file) => uploadImage({buffer:file.buffer,filename:file.originalname}))
+      (req.files || []).map((file) =>
+        uploadImage({ buffer: file.buffer, filename: file.originalname })
+      )
     );
   } catch (error) {
     console.log(error);
