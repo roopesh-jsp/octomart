@@ -19,4 +19,10 @@ porductRouter.post(
   productController.addProduct
 );
 
+//GET api/products/
+porductRouter.get("/", productController.getProducts);
+
+//GET api/products/:id
+porductRouter.get("/:id", productController.getProductById);
+
 module.exports = porductRouter;
