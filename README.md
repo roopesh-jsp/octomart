@@ -1,8 +1,6 @@
 # 🐙 Octomart - AI-Powered Microservices E-commerce Platform
 
-
-
-**Octomart** is a modern, AI-driven, multi-vendor e-commerce platform built with the MERN stack. Architected with 8 independent microservices, it's designed for high performance, scalability, and easy maintenance. The platform leverages a dedicated AI service to create a smart and personalized shopping experience for every user.
+**Octomart** is a modern, AI-driven, multi-vendor e-commerce backend platform built with **Node.js, Express.js, and MongoDB**. Architected with 8 independent microservices, it's designed for high performance, scalability, and easy maintenance. The platform leverages a dedicated AI service to power a smart and personalized shopping experience.
 
 ---
 
@@ -16,14 +14,12 @@
 -   **Full Order Management**: Complete order lifecycle from placement and payment to shipping and delivery.
 -   **Secure Payment Integration**: Securely process transactions through providers like Stripe or PayPal.
 
-
 ---
 
 ## 🛠️ Tech Stack & Architecture
 
 This project is built on a robust and modern tech stack, designed for scalability and independent development.
 
--   **Frontend**: React, Redux for state management, Tailwind CSS for styling.
 -   **Backend**: Node.js & Express.js for building RESTful APIs.
 -   **Database**: MongoDB with Mongoose for flexible data modeling.
 -   **Architecture**: Microservices connected via an API Gateway.
